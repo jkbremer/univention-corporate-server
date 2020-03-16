@@ -274,6 +274,7 @@ Recommends:
 Depends:
  python-pycountry,
  ucs-test-libs (= ${source:Version}),
+ python-pytest,
  ${misc:Depends},
 Provides:
  ucs-test-module,
