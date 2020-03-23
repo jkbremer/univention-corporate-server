@@ -10,6 +10,7 @@ Build-Depends:
  python-yaml,
  python3-all,
  python-psutil,
+ python-ldap,
  univention-config,
  univention-management-console-dev,
  univention-ucs-translation-template,
@@ -277,6 +278,7 @@ Depends:
  ucs-test-libs (= ${source:Version}),
  python-pytest,
  python-psutil,
+ python-ldap,
  ${misc:Depends},
 Provides:
  ucs-test-module,
@@ -290,6 +292,7 @@ Recommends:
  ucs-test-framework,
 Depends:
  ucs-test-libs (= ${source:Version}),
+ python-ldap,
  ${misc:Depends},
 Provides:
  ucs-test-module,
