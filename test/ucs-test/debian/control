@@ -9,6 +9,7 @@ Build-Depends:
  python-apt,
  python-yaml,
  python3-all,
+ python-psutil,
  univention-config,
  univention-management-console-dev,
  univention-ucs-translation-template,
@@ -275,6 +276,7 @@ Depends:
  python-pycountry,
  ucs-test-libs (= ${source:Version}),
  python-pytest,
+ python-psutil,
  ${misc:Depends},
 Provides:
  ucs-test-module,
