@@ -10,6 +10,7 @@ Build-Depends:
  python-yaml,
  python3-all,
  python-psutil,
+ python3-psutil,
  python-ldap,
  univention-config,
  univention-management-console-dev,
