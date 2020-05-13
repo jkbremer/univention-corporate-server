@@ -194,12 +194,12 @@ class DHCPBaseSubnet(DHCPBase):
 		super(DHCPBaseSubnet, self).ready()
 
 		try:
-			subnet = ipaddress.IPv4Network(u'%(subnet)s/%(subnetmask)s' % self.info)
+			subnet = IPv4Network(u'%(subnet)s/%(subnetmask)s' % self.info)
 		except ValueError:
 			raise uex.valueError(_('The subnet mask does not match the subnet.'), property='subnetmask')
 
 		if self.hasChanged('range') or not self.exists():
-			ranges = [tuple(ipaddress.IPv4Address(u'%s' % (ip,)) for ip in range_) for range_ in self['range']]
+			ranges = [tuple(IPv4Address(u'%s' % (ip,)) for ip in range_) for range_ in self['range']]
 			check_range_overlap(ranges)
 			check_range_subnet(subnet, ranges)
 
