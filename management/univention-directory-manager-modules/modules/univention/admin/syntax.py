@@ -1299,8 +1299,8 @@ class uid(simple):
 	>>> uid.parse('Admin')
 	'Admin'
 	"""
-	min_length = 1
-	max_length = 16
+	min_length = 1   # TODO: not enforced here
+	max_length = 16  # TODO: not enforced here
 	regex = re.compile('(?u)(^[a-zA-Z0-9])[a-zA-Z0-9._-]*([a-zA-Z0-9]$)')
 	# FIXME: (?!admin)
 	error_message = _("Value must not contain anything other than digits, letters, dots, dash or underscore, must be at least 2 characters long, must start and end with a digit or letter, and must not be admin!")
@@ -1309,11 +1309,20 @@ class uid(simple):
 class uid_umlauts(simple):
 	"""
 	Syntax for user account names supporting umlauts.
+
+	>>> syntax.uid_umlauts.parse('üser') == 'üser'
+	True
+	>>> syntax.uid_umlauts.parse('user') == 'user'
+	True
+	>>> syntax.uid_umlauts.parse('üs er') #doctest: +IGNORE_EXCEPTION_DETAIL +SKIP
+		...
+	univention.admin.uexceptions.valueError:
 	"""
 	name = 'uid'
-	min_length = 1
-	max_length = 16
-	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')
+	min_length = 1   # TODO: not enforced here
+	max_length = 16  # TODO: not enforced here
+	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')  # TODO: uid() above must be at least 2 chars long
+	# FIXME: The " -." in "[\w -.]" matches the ASCII character range(ord(' '),  ord('.')+1) == range(32, 47)
 
 	@classmethod
 	def parse(self, text):
@@ -1324,6 +1333,7 @@ class uid_umlauts(simple):
 		if self._re.match(text) is not None:
 			return text
 		else:
+			# TODO: Dashes are allowed too
 			raise univention.admin.uexceptions.valueError(_("Username must only contain numbers, letters and dots!"))
 
 
@@ -1331,9 +1341,10 @@ class uid_umlauts_lower_except_first_letter(simple):
 	"""
 	Syntax for user account names supporting umlauts expecpt for the first character.
 	"""
-	min_length = 1
-	max_length = 16
-	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')
+	min_length = 1   # TODO: not enforced here
+	max_length = 16  # TODO: not enforced here
+	_re = re.compile('(?u)(^\w[\w -.]*\w$)|\w*$')  # TODO: uid() above must be at least 2 chars long
+	# FIXME: The " -." in "[\w -.]" matches the ASCII character range(ord(' '),  ord('.')+1) == range(32, 47)
 
 	@classmethod
 	def parse(self, text):
@@ -1355,9 +1366,10 @@ class gid(simple):
 	>>> syntax.gid.parse(u'Groupe d’accès d’autorisation Windows') == 'Groupe d’accès d’autorisation Windows'  # Bug #35521
 	True
 	"""
-	min_length = 1
-	max_length = 32
+	min_length = 1   # TODO: not enforced here
+	max_length = 32  # TODO: not enforced here
 	regex = re.compile(u"(?u)^\w([\w -.’]*\w)?$")
+	# FIXME: The " -." in "[\w -.]" matches the ASCII character range(ord(' '),  ord('.')+1) == range(32, 47)
 	error_message = _(
 		"A group name must start and end with a letter, number or underscore. In between additionally spaces, dashes "
 		"and dots are allowed."
