@@ -1083,10 +1083,11 @@ class Localesubdirname_and_GNUMessageCatalog(complex):
 
 	See :py:class:`GNUMessageCatalog` and :py:class:`Localesubdirname`.
 
-	>>> integer.parse(('en_US', '3hIElQ==')) # first bytes of vim.mo
-	['en_US', '3hIElQ==']
-	>>> integer.parse(('en_US', 'qwerty')) #doctest: +IGNORE_EXCEPTION_DETAIL
-		...
+	>>> Localesubdirname_and_GNUMessageCatalog.parse(('en', '3hIElQ==')) # first bytes of vim.mo
+	['en', '3hIElQ==']
+	>>> Localesubdirname_and_GNUMessageCatalog.parse(('en', 'qwerty')) #doctest: +IGNORE_EXCEPTION_DETAIL
+	Traceback (most recent call last):
+	...
 	univention.admin.uexceptions.valueError:
 	>>> Localesubdirname_and_GNUMessageCatalog().new()
 	['', '']
@@ -1539,11 +1540,11 @@ class uid_umlauts(simple):
 	"""
 	Syntax for user account names supporting umlauts.
 
-	>>> syntax.uid_umlauts.parse('üser') == 'üser'
+	>>> uid_umlauts.parse('üser') == 'üser'
 	True
-	>>> syntax.uid_umlauts.parse('user') == 'user'
+	>>> uid_umlauts.parse('user') == 'user'
 	True
-	>>> syntax.uid_umlauts.parse('üs er') #doctest: +IGNORE_EXCEPTION_DETAIL +SKIP
+	>>> uid_umlauts.parse('üs er') #doctest: +IGNORE_EXCEPTION_DETAIL +SKIP
 	Traceback (most recent call last):
 	...
 	univention.admin.uexceptions.valueError:
@@ -1621,7 +1622,7 @@ class gid(simple):
 	"""
 	Syntax for group account names.
 
-	>>> syntax.gid.parse(u'Groupe d’accès d’autorisation Windows') == 'Groupe d’accès d’autorisation Windows'  # Bug #35521
+	>>> gid.parse(u'Groupe d’accès d’autorisation Windows') == 'Groupe d’accès d’autorisation Windows'  # Bug #35521
 	True
 	"""
 	min_length = 1   # TODO: not enforced here
