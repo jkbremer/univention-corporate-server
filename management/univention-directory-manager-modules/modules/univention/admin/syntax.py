@@ -881,6 +881,12 @@ class Localesubdirname_and_GNUMessageCatalog(complex):
 	Syntax for a message catalog and its language.
 
 	See :py:class:`GNUMessageCatalog` and :py:class:`Localesubdirname`.
+
+	>>> integer.parse(('en_US', '3hIElQ==')) # first bytes of vim.mo
+	['en_US', '3hIElQ==']
+	>>> integer.parse(('en_US', 'qwerty')) #doctest: +IGNORE_EXCEPTION_DETAIL
+		...
+	univention.admin.uexceptions.valueError:
 	"""
 	delimiter = ': '
 	subsyntaxes = [(_('Locale subdir name'), Localesubdirname), (_('GNU message catalog'), GNUMessageCatalog)]
