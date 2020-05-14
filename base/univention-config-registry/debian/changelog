@@ -1,4 +1,4 @@
-univention-config-registry (14.0.0-15) unstable; urgency=medium
+univention-config-registry (14.0.0-15-python3) unstable; urgency=medium
 
   * Bug #51156: fix python3 compatibility in interfaces.py and
     run_script()
