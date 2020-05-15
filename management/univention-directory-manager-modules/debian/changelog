@@ -1,3 +1,9 @@
+univention-directory-manager-modules (14.1.1-9) unstable; urgency=medium
+
+  * Bug #50648: Doctests for syntax.py
+
+ -- Dirk Wiesenthal <wiesenthal@univention.de>  Fri, 15 May 2020 10:04:58 +0200
+
 univention-directory-manager-modules (14.1.1-8) unstable; urgency=medium
 
   * Bug #50648: Fix encoding in locking
