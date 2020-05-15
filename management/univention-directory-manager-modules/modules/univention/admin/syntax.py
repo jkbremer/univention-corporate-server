@@ -1093,8 +1093,8 @@ class Localesubdirname_and_GNUMessageCatalog(complex):
 	['', '']
 	>>> Localesubdirname_and_GNUMessageCatalog().any()
 	['*', '*']
-	>>> Localesubdirname_and_GNUMessageCatalog().type_class_multivalue
-	<class 'admin.syntax.complex.type_class.<locals>.ComplexMultiValueKeyValueDictType'>
+	>>> Localesubdirname_and_GNUMessageCatalog().type_class_multivalue.__name__
+	'ComplexMultiValueKeyValueDictType'
 	"""
 	delimiter = ': '
 	subsyntaxes = [(_('Locale subdir name'), Localesubdirname), (_('GNU message catalog'), GNUMessageCatalog)]
@@ -1460,9 +1460,9 @@ class IA5string(string):
 	"""
 	Syntax for string from International Alphabet 5 (printable |ASCII|)
 
-	>>> IA5string.parse(''' !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~''')
+	>>> IA5string.parse(''' !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~''')  # doctest: +ALLOW_UNICODE
 	' !\"#$%&\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
-	>>> IA5string.parse(b'abc')
+	>>> IA5string.parse(b'abc')  # doctest: +ALLOW_UNICODE
 	'abc'
 	>>> IA5string.parse('öäüÖÄÜß€') #doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
@@ -1544,16 +1544,12 @@ class uid_umlauts(simple):
 	True
 	>>> uid_umlauts.parse('user') == 'user'
 	True
-	>>> uid_umlauts.parse('üs er') #doctest: +IGNORE_EXCEPTION_DETAIL +SKIP
+	>>> uid_umlauts.parse(b'admin')  # doctest: +ALLOW_UNICODE
+	'admin'
+	>>> uid_umlauts.parse('üs er') #doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
 	...
 	univention.admin.uexceptions.valueError:
-	>>> uid_umlauts.parse('admin')
-	'admin'
-	>>> uid_umlauts.parse(b'admin')
-	'admin'
-	>>> uid_umlauts.parse('ädmin')
-	'ädmin'
 	>>> uid_umlauts.parse('ädmin no.2') #doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
 	...
@@ -1589,8 +1585,8 @@ class uid_umlauts_lower_except_first_letter(simple):
 	'admin'
 	>>> uid_umlauts_lower_except_first_letter.parse(b'admin')  # doctest: +ALLOW_UNICODE
 	'admin'
-	>>> uid_umlauts_lower_except_first_letter.parse('ädmin')  # doctest: +ALLOW_UNICODE
-	'ädmin'
+	>>> uid_umlauts_lower_except_first_letter.parse('ädmin') == 'ädmin'
+	True
 	>>> uid_umlauts_lower_except_first_letter.parse('admin@2') #doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
 	...
@@ -1953,8 +1949,8 @@ class IP_AddressRange(complex):
 	Traceback (most recent call last):
 	...
 	valueError: Not a valid IP address!
-	>>> IP_AddressRange().type_class
-	<class 'admin.syntax.complex.type_class.<locals>.ComplexMultiValueDictType'>
+	>>> IP_AddressRange().type_class.__name__
+	'ComplexMultiValueDictType'
 	"""
 	subsyntaxes = (
 		(_('First address'), ipAddress),
@@ -2455,8 +2451,8 @@ class dnsHostname(dnsName):
 
 class dnsName_umlauts(simple):
 	u"""
-	>>> dnsName_umlauts.parse(u'ä')
-	'ä'
+	>>> dnsName_umlauts.parse(u'ä') == 'ä'
+	True
 	>>> dnsName_umlauts.parse('a_0-A')
 	'a_0-A'
 	>>> dnsName_umlauts.parse('0') # doctest: +IGNORE_EXCEPTION_DETAIL
@@ -5427,10 +5423,10 @@ class PortalEntrySelection(complex):
 class PortalCategorySelection(simple):
 	r"""
 	Syntax to select a portal category.
-	>>> x = PortalCategorySelection.tostring([["cn=category1", []], ["cn=category2", ["cn=entry1", "cn=entry2"]]])
+	>>> x = PortalCategorySelection.tostring([["cn=category1", []], ["cn=category2", ["cn=entry1", "cn=entry2"]]])  # doctest: +ALLOW_UNICODE
 	>>> x.replace(' ','').replace('\n','')
 	'[["cn=category1",[]],["cn=category2",["cn=entry1","cn=entry2"]]]'
-	>>> PortalCategorySelection.parse('[["cn=category1",[]],["cn=category2",["cn=entry1","cn=entry2"]]]')
+	>>> PortalCategorySelection.parse('[["cn=category1",[]],["cn=category2",["cn=entry1","cn=entry2"]]]')  # doctest: +ALLOW_UNICODE
 	[['cn=category1', []], ['cn=category2', ['cn=entry1', 'cn=entry2']]]
 	>>> PortalCategorySelection.parse('[["cn=category1",[]],["",["cn=entry1","cn=entry2"]]]') #doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
