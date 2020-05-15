@@ -2095,8 +2095,8 @@ class emailAddressTemplate(emailAddress):
 class emailAddressValidDomain(emailAddress):
 	"""
 	Syntax class for an e-mail address in one of the registered e-mail domains.
-	>>> from univention.admin.uldap import getAdminConnection
-	>>> lo, pos = getAdminConnection()
+	>>> from univention.admin.uldap import getMachineConnection
+	>>> lo, pos = getMachineConnection()
 	>>> emailAddressValidDomain.checkLdap(lo, 'user@example.com') # doctest: +IGNORE_EXCEPTION_DETAIL
 	Traceback (most recent call last):
 	...
@@ -4891,8 +4891,8 @@ class LDAP_Search(select):
 	or programmatically by directly instantiating
 
 		LDAP_Search( filter = '<LDAP-Search-Filter>', attribute = [ '<LDAP attributes>', ... ], value = '<LDAP attribute>', base = '<LDAP base>' )
-	>>> from univention.admin.uldap import getAdminConnection
-	>>> lo, pos = getAdminConnection()
+	>>> from univention.admin.uldap import getMachineConnection
+	>>> lo, pos = getMachineConnection()
 	>>> syntax = LDAP_Search('mysyntax', '(univentionObjectType=users/user)', ['uid'])
 	>>> syntax._load(lo)
 	>>> syntax._prepare(lo)
