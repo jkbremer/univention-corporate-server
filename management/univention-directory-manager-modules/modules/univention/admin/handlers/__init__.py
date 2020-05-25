@@ -3591,7 +3591,6 @@ class _MergedAttributes(object):
 		return list(values)
 
 
-
 if __name__ == '__main__':
 	import doctest
 	doctest.testmod()
