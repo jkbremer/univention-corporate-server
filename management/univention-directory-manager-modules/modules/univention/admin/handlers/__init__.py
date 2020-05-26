@@ -584,7 +584,7 @@ class simpleLdap(object):
 
 	def _get_admin_diary_args_names(self, event):
 		ret = []
-		for name, prop in self.descriptions.tems():
+		for name, prop in self.descriptions.items():
 			if name in event.args:
 				ret.append(name)
 		return ret
