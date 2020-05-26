@@ -88,9 +88,9 @@ for policy_reference_dn, policy_reference_attr in lo.search_s(baseDN, ldap.SCOPE
 	if "univentionPolicyReference" in policy_reference_attr:
 		# to_delete = []
 		modlist = []
-		for el in policy_reference_attr["univentionPolicyReference"]:
-			if el.decode('utf-8') in policy_object:
-				policy_object[el.decode('utf-8')] = 1
+		for el in [x.decode('utf-8') for x in policy_reference_attr["univentionPolicyReference"]]:
+			if el in policy_object:
+				policy_object[el] = 1
 			else:
 				print("referenced policy does not exists:", policy_reference_dn, "->", el)
 				count_references = count_references + 1
