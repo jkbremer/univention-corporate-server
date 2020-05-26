@@ -92,23 +92,38 @@ for posix_account, posix_account_attrs in res_pA:
 				print(" - user password not set")
 
 			if 'shadowExpire' in posix_account_attrs and posix_account_attrs['shadowExpire'][0]:
-				userexpiry = time.strftime("%d.%m.%y", time.gmtime((posix_account_attrs['shadowExpire'][0]) * 3600 * 24))
-				krb5ValidEnd = ("20" + userexpiry[6:8] + userexpiry[3:5] + userexpiry[0:2] + "000000Z").encode('utf-8')
-				if 'krb5ValidEnd' not in posix_account_attrs:
-					modlist = [(ldap.MOD_ADD, 'krb5ValidEnd', krb5ValidEnd)]
-					lo.modify_s(dn_pA, modlist)
-					print(" - kerberos expiry initial set")
-				elif not posix_account_attrs['krb5ValidEnd'][0] == krb5ValidEnd:
-					modlist = [(ldap.MOD_REPLACE, 'krb5ValidEnd', krb5ValidEnd)]
-					lo.modify_s(dn_pA, modlist)
-					print(" - kerberos expiry set")
+				try:
+					shadowExpire = int(posix_account_attrs['shadowExpire'][0])
+				except ValueError:
+					print("ERROR: shadowExpire invalid: %s" % (posix_account_attrs['shadowExpire'][0],))
 				else:
-					print(" - kerberos expiry OK")
+					userexpiry = time.strftime("%d.%m.%y", time.gmtime((shadowExpire) * 3600 * 24))
+					krb5ValidEnd = ("20" + userexpiry[6:8] + userexpiry[3:5] + userexpiry[0:2] + "000000Z").encode('utf-8')
+					if 'krb5ValidEnd' not in posix_account_attrs:
+						modlist = [(ldap.MOD_ADD, 'krb5ValidEnd', krb5ValidEnd)]
+						lo.modify_s(dn_pA, modlist)
+						print(" - kerberos expiry initial set")
+					elif not posix_account_attrs['krb5ValidEnd'][0] == krb5ValidEnd:
+						modlist = [(ldap.MOD_REPLACE, 'krb5ValidEnd', krb5ValidEnd)]
+						lo.modify_s(dn_pA, modlist)
+						print(" - kerberos expiry set")
+					else:
+						print(" - kerberos expiry OK")
 			else:
 				print(" - account expire not set")
 
 			if 'shadowLastChange' in posix_account_attrs and 'shadowMax' in posix_account_attrs:
-				passwordexpiry = time.strftime("%d.%m.%y", time.gmtime((posix_account_attrs['shadowLastChange'][0] + posix_account_attrs['shadowMax'][0]) * 3600 * 24))
+				try:
+					shadowLastChange = int(posix_account_attrs['shadowLastChange'][0])
+				except ValueError:
+					print("ERROR: shadowLastChange invalid: %s" % (posix_account_attrs['shadowLastChange'][0],))
+					continue
+				try:
+					shadowMax = int(posix_account_attrs['shadowMax'][0])
+				except ValueError:
+					print("ERROR: shadowMax invalid: %s" % (posix_account_attrs['shadowMax'][0],))
+					continue
+				passwordexpiry = time.strftime("%d.%m.%y", time.gmtime((shadowLastChange + shadowMax) * 3600 * 24))
 				krb5PasswordEnd = ("20" + passwordexpiry[6:8] + passwordexpiry[3:5] + passwordexpiry[0:2] + "000000Z").encode('utf-8')
 				if 'krb5PasswordEnd' not in posix_account_attrs:
 					modlist = [(ldap.MOD_ADD, 'krb5PasswordEnd', krb5PasswordEnd)]
