@@ -42,6 +42,7 @@ import calendar
 import types
 import pprint
 import warnings
+import string
 
 import ldap
 from ldap.controls import LDAPControl
@@ -603,15 +604,15 @@ def decode_addlist(list, encoding):
 
 
 def compatible_list(list):
-	return encode_list(decode_list(list, 'latin1'))
+	return encode_list(decode_list(list, 'latin1'), 'utf8')
 
 
 def compatible_modlist(list):
-	return encode_modlist(decode_modlist(list, 'latin1'))
+	return encode_modlist(decode_modlist(list, 'latin1'), 'utf8')
 
 
 def compatible_addlist(list):
-	return encode_addlist(decode_addlist(list, 'latin1'))
+	return encode_addlist(decode_addlist(list, 'latin1'), 'utf8')
 
 
 def compatible_modstring(string):
