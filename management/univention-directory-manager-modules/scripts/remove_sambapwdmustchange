@@ -43,7 +43,12 @@ if __name__ == '__main__':
 	ACTIONS = ('test', 'remove')
 
 	parser = ArgumentParser(description='\nremove the sambaPwdMustChange value from all accounts')
-	parser.add_argument('action', choices=ACTIONS, nargs='?')
+	parser.add_argument(
+		"action",
+		help="Test for sambaPwdMustChange values, or remove them. The default action is test.",
+		choices=ACTIONS,
+		nargs='?'
+	)
 
 	options = parser.parse_args()
 
@@ -53,8 +58,6 @@ if __name__ == '__main__':
 		print('warning: no action given. default is test', file=sys.stderr)
 		print('', file=sys.stderr)
 		options.action = ['test']
-
-	action = options.action
 
 	configRegistry = univention.config_registry.ConfigRegistry()
 	configRegistry.load()
@@ -68,7 +71,7 @@ if __name__ == '__main__':
 	else:
 		for ob in res:
 			print('Remove sambaPwdMustChange (%s) for %s' % (ob[1].get('sambaPwdMustChange', [])[0].decode('utf-8'), ob[0],), end=' ')
-			if action == 'remove':
+			if options.action == 'remove':
 				lo.modify(ob[0], [('sambaPwdMustChange', ob[1].get('sambaPwdMustChange', []), b'')])
 				print('done')
 			else:

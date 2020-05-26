@@ -107,12 +107,18 @@ if __name__ == '__main__':
 	)
 	parser.add_argument(
 		"action",
-		help="Test for base64 images, or convert them. Default behaviour is test.",
+		help="Test for base64 images, or convert them. The default action is test.",
 		choices=ACTIONS,
-		default="test",
 		nargs='?'
 	)
 	options = parser.parse_args()
+
+	# check argument (action)
+	if not options.action:
+		print('', file=sys.stderr)
+		print('warning: no action given. default is test', file=sys.stderr)
+		print('', file=sys.stderr)
+		options.action = ['test']
 
 	# action!
 	try:

@@ -91,7 +91,7 @@ if len(computer_zones) == 0:
 modified_objects = 0
 objects_to_modify = 0
 for computer in computers:
-	dn = computers[computer][0].decode('utf-8')
+	dn = computers[computer][0]
 	try:
 		if len(computer_zones[computer]) == 1:
 			if options.auto_add:
