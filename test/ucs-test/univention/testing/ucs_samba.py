@@ -5,6 +5,7 @@ import socket
 import re
 import contextlib
 
+import six
 import sqlite3
 import ldb
 import ldap
