@@ -62,8 +62,8 @@ def replace_umlaut(line):
 	u"""
 	Replace german umlauts.
 
-	>>> replace_umlaut(u'überschrieben')
-	u'ueberschrieben'
+	>>> replace_umlaut('überschrieben')
+	'ueberschrieben'
 	"""
 	return replace_dict(line, UMLAUTS)  # pylint: disable-msg=E1101
 
@@ -94,13 +94,13 @@ except ImportError:
 
 
 UMLAUTS = {  # type: ignore # pylint: disable-msg=W0612
-	u'Ä': 'Ae',
-	u'ä': 'ae',
-	u'Ö': 'Oe',
-	u'ö': 'oe',
-	u'Ü': 'Ue',
-	u'ü': 'ue',
-	u'ß': 'ss',
+	'Ä': 'Ae',
+	'ä': 'ae',
+	'Ö': 'Oe',
+	'ö': 'oe',
+	'Ü': 'Ue',
+	'ü': 'ue',
+	'ß': 'ss',
 }
 
 

@@ -94,7 +94,7 @@ class Service(uit.LocalizedDictionary):
 		try:
 			return self.__change_state('status')[1]
 		except EnvironmentError:
-			return u''
+			return ''
 
 	def _change_state(self, action):
 		rc, output = self.__change_state(action)

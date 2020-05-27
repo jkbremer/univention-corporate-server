@@ -50,7 +50,7 @@ class TestConfigRegistry(unittest.TestCase):
 		lock = Lock() if DO_LOCKING else DummyLock()
 
 		def run(tid):
-			for iteration in xrange(ITERATIONS):
+			for iteration in range(ITERATIONS):
 				i = tid + iteration
 				random = pow(BASE, i, PRIME)
 				key = KEY[:random + 1]
@@ -68,7 +68,7 @@ class TestConfigRegistry(unittest.TestCase):
 						ucr.save()
 
 		threads = []
-		for tid in xrange(THREADS):
+		for tid in range(THREADS):
 			thread = Thread(target=run, name='%d' % tid, args=(tid,))
 			threads.append(thread)
 		for thread in threads:

@@ -31,11 +31,11 @@
 # <https://www.gnu.org/licenses/>.
 
 override_dh_auto_test:
-	python -m doctest python/ucs.py  -v
+	python3 -m doctest python/ucs.py  -v
 
 override_dh_auto_install:
 	univention-install-config-registry
 	dh_auto_install
 
 %:
-	dh $@ --with python2,python3
+	dh $@ --with python3

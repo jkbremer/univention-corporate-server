@@ -35,6 +35,7 @@ try:
 	from typing import List, Tuple, Union
 except ImportError:
 	pass
+import six
 
 
 class UCS_Version(object):
@@ -64,7 +65,7 @@ class UCS_Version(object):
 		"""
 		if isinstance(version, (tuple, list)):
 			self.mmp = map(int, version)  # type: ignore
-		elif isinstance(version, basestring):
+		elif isinstance(version, six.string_types):
 			self.set(version)
 		elif isinstance(version, UCS_Version):
 			self.mmp = version.mmp
