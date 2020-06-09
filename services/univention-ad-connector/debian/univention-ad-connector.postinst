@@ -95,8 +95,6 @@ call_joinscript 81univention-ad-connector.inst
 
 #DEBHELPER#
 
-if [ -x /etc/init.d/univention-management-console-server ]; then
-	/etc/init.d/univention-management-console-server crestart
-fi
+systemctl try-restart univention-management-console-server
 
 exit 0
