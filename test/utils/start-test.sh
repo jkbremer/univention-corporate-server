@@ -15,7 +15,7 @@ die () {
 
 release='5.0-0'
 old_release='4.4-4'
-kvm_template_version='5.0-0+e0'
+kvm_template_version='5.0-0'
 
 # AMI: Univention Corporate Server (UCS) 5.0
 export CURRENT_AMI=TODO
