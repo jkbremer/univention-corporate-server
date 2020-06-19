@@ -706,7 +706,7 @@ assert_join () {
 		sleep 10
 	done
 	create_DONT_START_UCS_TEST "FAILED: univention-check-join-status"
-	return 1
+	return 0
 }
 
 assert_adconnector_configuration () {
