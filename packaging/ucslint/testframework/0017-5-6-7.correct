@@ -1,0 +1,3 @@
+S:0017-5: shell.sh:2:116: Use `sed -n "s/^prefix: //p"`
+S:0017-6: shell.sh:3:12: Use `ldapsearch -o ldif-wrap=no`
+S:0017-7: shell.sh:5:1: Use `array+=(val)`
